@@ -10,25 +10,11 @@ app.use("/public", express.static(__dirname + "/public"));
 
 app.get("/json", function(req, res){
     // let caseN = process.env.MESSAGE_STYLE;
-    // if(process.env.MESSAGE_STYLE==='uppercase'){
-    //     res.json({
-    //     "message": "HELLO JSON"
-    //   })
-    //   } else {
-    //       res.json({
-    //     "message": "Hello json"
-    //   })
-    //     };
-        var response = {
-            "message": "Hello json"
-          };
-          
-          if(process.env.MESSAGE_STYLE==='uppercase'){
-            //Override message attribute value based on condition
-            response.message = response.message.toUpperCase();  
-          }
-          
-          return res.json(response);
+    if(process.env.MESSAGE_STYLE === "uppercase"){
+        res.json( {"message": "Hello json".toUpperCase()});
+    } else {
+        res.json( {"message": "Hello json".toUpperCase()});        
+    }
 });
 
 
