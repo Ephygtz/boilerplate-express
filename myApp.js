@@ -12,13 +12,20 @@ app.get("/now", (req, res, next) => {
     req.time = new Date().toString();
     next();
 }, (req, res) => {
-    console.log({"time" : req.time});
     res.json({"time" : req.time});
 });
 
+//route params
 app.get("/:word/echo", (req, res, next) =>{
-    // console.log({"echo" : req.params.word});
     res.json({echo : req.params.word});
+    next();
+});
+
+//query params
+app.get("/name", (req, res) => {
+    let {first: firstname, last: lastname } = req.query;
+
+    res.json({name : `${firstname} ${lastname}`});
 });
 
 app.get("/", function(req, res){
@@ -35,14 +42,6 @@ app.get('/json', (req, res) => {
         res.json({'message': message});
 });
 
-// app.get("/json", function(req, res){
-//     // let caseN = process.env.MESSAGE_STYLE;
-//     if(process.env.MESSAGE_STYLE === "uppercase"){
-//         res.json( {"message": "Hello json".toUpperCase()});
-//     } else {
-//         res.json( {"message": "Hello json"});
-//     }
-// });
 
 
 
