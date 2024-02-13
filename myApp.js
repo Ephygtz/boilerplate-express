@@ -7,8 +7,20 @@ let bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended : false }));
 app.use(bodyParser.json());
 
-app.post((req, res, next) => {
+app.post("/name", (req, res, next) => {
+    let {first: firstname, last: lastname } = req.body;
 
+    res.json({name : `${firstname} ${lastname}`});
+
+    next();
+});
+
+
+//query params
+app.get("/name", (req, res) => {
+    let {first: firstname, last: lastname } = req.query;
+
+    res.json({name : `${firstname} ${lastname}`});
 });
 
 app.use((req, res, next) => {
@@ -30,12 +42,7 @@ app.get("/:word/echo", (req, res, next) =>{
     next();
 });
 
-//query params
-app.get("/name", (req, res) => {
-    let {first: firstname, last: lastname } = req.query;
 
-    res.json({name : `${firstname} ${lastname}`});
-});
 
 app.get("/", function(req, res){
     res.sendFile(__dirname + "/views/index.html");
